@@ -1,0 +1,72 @@
+
+Drop table if exists Assistants;
+
+
+--CREATE TABLES--
+create table Assistants (
+id int primary key identity,
+Teacher_id int not null references Teacher(id)
+);
+
+create table Curators (
+ID INT primary key identity,
+Teacher_id int not null references Teacher(id)
+);
+
+create table Deans (
+id int primary key identity,
+Teacher_id int not null references Teacher(id)
+);
+
+
+create table Departments (
+id rint primary key identity,
+building int not null check(building between 1 and 5),
+name varchar(100) not null default 0,
+unique(name),
+Faculty_id int not null references Faculty(id),
+Head_id int not null references Head(id)
+);
+
+
+create table Faculties (
+id int primary key identity,
+building int not null check(building between 1 and 5),
+name varchar(100) not null default 0,
+unique(name),
+Dean_id int not null references Dean(id)
+);
+
+
+create table Groups (
+id int PRIMARY KEY identity,
+name varchar(10) not null default 0,
+year int not null check(year between 1 and 5),
+Department_id int not null references Department(id)
+);
+
+
+create table GroupsCurators (
+id int primary key identity,
+Curator_id int not null references Curator(id),
+Group_id int not null references Group(id)
+);
+
+create table GroupsLectures (
+id int primary key identity,
+Group_id int not null references Group(id),
+Lecture_id int not null references Lecture(id)
+);
+
+
+create table Heads (
+id int primary key identity,
+Teacher_id int not null references Teacher(id)
+); 
+
+
+create table Schadules (
+id int primary key,
+class int not null check(class between 1 and 8)
+);
+
